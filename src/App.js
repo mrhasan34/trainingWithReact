@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom'; // <Router> kaldırıldı
 import Header from './components/Header';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -14,20 +14,20 @@ function App() {
 
   return (
     <div className="App">
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       
       <Routes>
         <Route path="/" element={
-          isLoggedIn ? <Home savedItems={savedItems} setSavedItems={setSavedItems}/> : <Navigate to="/login" />
-        }/>
+          isLoggedIn ? <Home savedItems={savedItems} setSavedItems={setSavedItems} /> : <Navigate to="/login" />
+        } />
         <Route path="/profile" element={
-          isLoggedIn ? <Profile/> : <Navigate to="/login" />
-        }/>
+          isLoggedIn ? <Profile /> : <Navigate to="/login" />
+        } />
         <Route path="/saved" element={
-          isLoggedIn ? <Saved savedItems={savedItems}/> : <Navigate to="/login" />
-        }/>
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn}/>}/>
+          isLoggedIn ? <Saved savedItems={savedItems} /> : <Navigate to="/login" />
+        } />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/signup" element={<Signup setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
     </div>
   );

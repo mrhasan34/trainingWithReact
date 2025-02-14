@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FaUser, FaLock } from "react-icons/fa"; // İkonları ekleyin
+import { FaUser, FaLock } from "react-icons/fa";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode"; // jwt_decode yerine jwtDecode kullanılıyor
 import "./Login.css";
 
 const Login = () => {
@@ -23,6 +25,17 @@ const Login = () => {
       console.log("Giriş Başarılı:", values);
     },
   });
+
+  const handleGoogleSuccess = (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential); // jwt_decode yerine jwtDecode
+    console.log("Google Giriş Başarılı! Kullanıcı Bilgileri:", decoded);
+    localStorage.setItem("user", JSON.stringify(decoded));
+    window.location.href = "/"; // Ana sayfaya yönlendir
+  };
+
+  const handleGoogleError = () => {
+    console.error("Google Giriş Başarısız");
+  };
 
   return (
     <div className="login-container">
@@ -67,6 +80,15 @@ const Login = () => {
             Giriş Yap
           </button>
         </form>
+        <div className="google-login">
+          <GoogleOAuthProvider clientId="1000455918443-ggpc5gccprkujdls73pgtq71hm26rmva.apps.googleusercontent.com">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              useOneTap
+            />
+          </GoogleOAuthProvider>
+        </div>
         <p className="signup-link">
           Hesabınız yok mu? <Link to="/signup">Kayıt Ol</Link>
         </p>

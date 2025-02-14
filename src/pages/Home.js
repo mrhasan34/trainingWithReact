@@ -23,7 +23,7 @@ const Home = ({ savedItems, setSavedItems }) => {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>Hobby Garden</h1> {/* Stil ekledim */}
+      <h1 style={{ textAlign: 'center' }}>Hobby Garden</h1>
       <Filter 
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

@@ -11,7 +11,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         {isLoggedIn ? (
           <>
             <Link to="/" style={styles.link}>Ana Sayfa</Link>
-            <Link to="/profile" style={styles.link}>Profil</Link>
+            <Link to="/profile" style={styles.link}>Profilim</Link> {/* Güncellendi */}
             <Link to="/saved" style={styles.link}>Kaydedilenler</Link>
             <button onClick={handleLogout} style={styles.button}>Çıkış Yap</button>
           </>
@@ -25,6 +25,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
     </header>
   );
 };
+
+// Stiller aynı kalabilir
 
 const styles = {
   header: {

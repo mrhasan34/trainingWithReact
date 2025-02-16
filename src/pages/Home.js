@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Filter from '../components/Filter';
 
 const Home = ({ savedItems, setSavedItems }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
-  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (userData) {
+      setUser(userData);
+    }
+  }, []);
+
   // Örnek veriler
   const items = [
     { id: 1, title: 'Bitki Bakımı', category: 'Bitki' },
@@ -24,6 +32,7 @@ const Home = ({ savedItems, setSavedItems }) => {
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Hobby Garden</h1>
+      {user && <h2 style={{ textAlign: 'center' }}>Hoşgeldin, {user.name}!</h2>}
       <Filter 
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

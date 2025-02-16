@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom'; // <Router> kaldırıldı
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Profile from './pages/Profile';

@@ -1,13 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaUser, FaLock } from "react-icons/fa";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; // jwt_decode yerine jwtDecode kullanılıyor
+import { jwtDecode } from "jwt-decode";
 import "./Login.css";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -23,14 +25,17 @@ const Login = () => {
     }),
     onSubmit: (values) => {
       console.log("Giriş Başarılı:", values);
+      setIsLoggedIn(true);
+      navigate("/");
     },
   });
 
   const handleGoogleSuccess = (credentialResponse) => {
-    const decoded = jwtDecode(credentialResponse.credential); // jwt_decode yerine jwtDecode
+    const decoded = jwtDecode(credentialResponse.credential);
     console.log("Google Giriş Başarılı! Kullanıcı Bilgileri:", decoded);
     localStorage.setItem("user", JSON.stringify(decoded));
-    window.location.href = "/"; // Ana sayfaya yönlendir
+    setIsLoggedIn(true);
+    navigate("/");
   };
 
   const handleGoogleError = () => {
